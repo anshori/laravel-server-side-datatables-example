@@ -1,4 +1,4 @@
-# Laravel Server Side Example
+# Laravel Server Side DataTables Example
 
 ## Installation
 1. Clone this repository
