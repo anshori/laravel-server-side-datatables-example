@@ -15,6 +15,9 @@
 2. Displaying the locations of 25,000 people on a map using Leaflet.js controlled by bounding box coordinates
 3. Using Bootstrap for styling and layout
 
+## Demo
+- [https://serversidedatatables.unsorry.net](https://serversidedatatables.unsorry.net)
+
 ## Screenshots
 ![Screenshot](public/assets/images/datatables.png)
 ![Screenshot](public/assets/images/map.png)
