@@ -38,6 +38,7 @@
 ## Screenshots
 ![Screenshot](public/assets/images/datatables.png)
 ![Screenshot](public/assets/images/map.png)
+![Screenshot](public/assets/images/map-search.png)
 
 ___
 > unsorry@2025
