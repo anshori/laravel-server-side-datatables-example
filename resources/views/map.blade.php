@@ -134,6 +134,46 @@
       }
     });
 
+    // GeoJSON Point
+    var point = L.geoJSON(null, {
+      onEachFeature: function(feature, layer) {
+        let popup = `<table class="table table-sm">
+							<tr>
+								<th>Name</th>
+								<td>:</td>
+								<td>${feature.properties.name}</td>
+							</tr>
+							<tr>
+								<th>Email</th>
+								<td>:</td>
+								<td>${feature.properties.email}</td>
+							</tr>
+							<tr>
+								<th>Hometown</th>
+								<td>:</td>
+								<td>${feature.properties.hometown}</td>
+							</tr>
+							<tr>
+								<th>Company</th>
+								<td>:</td>
+								<td>${feature.properties.company}</td>
+							</tr>
+						</table>`;
+        layer.on({
+          click: function(e) {
+            point.bindPopup(popup);
+            highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature
+              .geometry.coordinates[0]
+            ], highlightStyle));
+            highlight.addTo(map);
+          },
+          mouseover: function(e) {
+            point.bindTooltip(feature.properties.name);
+          },
+        });
+      },
+    });
+
     /* Typeahead search functionality */
     $(document).one("ajaxStop", function() {
       var personsBH = new Bloodhound({
@@ -188,9 +228,8 @@
       }).on("typeahead:selected", function(obj, datum) {
         if (datum.source === "Persons") {
           map.setView([datum.lat, datum.lng], 16);
-          if (map._layers[datum.id]) {
-            map._layers[datum.id].fire("click");
-          }
+          highlight.clearLayers().addLayer(L.circleMarker([datum.lat, datum.lng], highlightStyle));
+          highlight.addTo(map);
         }
         if ($(".navbar-collapse").height() > 50) {
           $(".navbar-collapse").collapse("hide");
@@ -229,44 +268,6 @@
 
       $('#geojson_attribution').attr('href', geojsonUrl);
 
-      // GeoJSON Point
-      var point = L.geoJSON(null, {
-        onEachFeature: function(feature, layer) {
-          let popup = `<table class="table table-sm">
-							<tr>
-								<th>Name</th>
-								<td>:</td>
-								<td>${feature.properties.name}</td>
-							</tr>
-							<tr>
-								<th>Email</th>
-								<td>:</td>
-								<td>${feature.properties.email}</td>
-							</tr>
-							<tr>
-								<th>Hometown</th>
-								<td>:</td>
-								<td>${feature.properties.hometown}</td>
-							</tr>
-							<tr>
-								<th>Company</th>
-								<td>:</td>
-								<td>${feature.properties.company}</td>
-							</tr>
-						</table>`;
-          layer.on({
-            click: function(e) {
-              point.bindPopup(popup);
-            },
-            mouseover: function(e) {
-              point.bindTooltip(feature.properties.name);
-              highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature
-                .geometry.coordinates[0]
-              ], highlightStyle));
-            },
-          });
-        },
-      });
       $.getJSON(geojsonUrl, function(data) {
         point.addData(data);
         map.addLayer(point);
