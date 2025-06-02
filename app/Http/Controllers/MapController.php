@@ -55,4 +55,22 @@ class MapController extends Controller
 		];
 		return response()->json($geojson, 200, [], JSON_NUMERIC_CHECK);
 	}
+
+	public function search(Request $request)
+	{
+		$query = $request->input('search');
+
+		if (is_null($query)) {
+			return response()->json(['error' => 'Missing search query'], 400);
+		}
+
+		// Search for persons by name
+		$persons = $this->persons->search($query)->limit(10)->get();
+
+		if ($persons->isEmpty()) {
+			return response()->json(['message' => 'No results found'], 404);
+		}
+
+		return response()->json($persons, 200, [], JSON_NUMERIC_CHECK);
+	}
 }

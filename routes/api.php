@@ -11,3 +11,4 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/json', [TableController::class, 'json'])->name('api.json');
 Route::get('/geojson', [MapController::class, 'geojson'])->name('api.geojson');
+Route::get('/persons', [MapController::class, 'search'])->name('api.persons.search');

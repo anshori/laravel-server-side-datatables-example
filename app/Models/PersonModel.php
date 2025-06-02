@@ -34,4 +34,9 @@ class PersonModel extends Model
 			],
 		];
 	}
+
+	public function search($query)
+	{
+		return $this->where('name', 'ilike', "%{$query}%");
+	}
 }

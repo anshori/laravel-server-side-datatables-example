@@ -3,6 +3,11 @@
 @section('style')
   <link href="https://cdn.datatables.net/2.3.1/css/dataTables.bootstrap5.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/buttons/3.2.3/css/buttons.bootstrap5.css" rel="stylesheet">
+	<style>
+		.card {
+			margin-top: 76px; /* Adjust for fixed navbar */
+		}
+	</style>
 @endsection
 
 @section('content')
