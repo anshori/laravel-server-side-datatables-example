@@ -31,8 +31,8 @@ class TableController extends Controller
 	public function table()
 	{
 		$data = [
-			'title' => 'Table',
-			'page' => 'table',
+			'title' => 'Table Pagination',
+			'page' => 'table-pagination',
 			'persons' => $this->persons
 			->when(request('search'), function ($query) {
 				$search = request('search');
