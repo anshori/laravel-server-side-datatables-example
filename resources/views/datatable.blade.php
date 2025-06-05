@@ -14,7 +14,7 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h5>Persons</h5>
+        <h5><i class="bi bi-people-fill"></i> Persons</h5>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -94,7 +94,7 @@
           },
           {
 						render: function(data, type, row) {
-							return '<a href="https://www.google.com/maps/search/?api=1&query=' + row.latitude + ',' + row.longitude + '" target="_blank" rel="noopener noreferrer">' + row.latitude + ',' + row.longitude + '</a>';
+							return `<a href="https://www.google.com/maps/search/?api=1&query=${row.latitude},${row.longitude}" target="_blank" rel="noopener noreferrer">${row.latitude},${row.longitude}</a>`;
 						},
           },
           {

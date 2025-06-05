@@ -9,4 +9,5 @@ Route::get('/welcome', function () {
 });
 
 Route::get('/', [TableController::class, 'datatables'])->name('datatables');
+Route::get('/table', [TableController::class, 'table'])->name('table');
 Route::get('/map', [MapController::class, 'index'])->name('map');

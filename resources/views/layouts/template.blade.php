@@ -26,6 +26,10 @@
               DataTables</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{ route('table') }}"><i class="bi bi-table"></i>
+              Table Pagination</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{ route('map') }}"><i class="bi bi-geo-alt-fill"></i>
               Map</a>
           </li>

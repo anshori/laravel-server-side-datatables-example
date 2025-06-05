@@ -8,9 +8,14 @@ use Yajra\DataTables\Facades\DataTables;
 
 class TableController extends Controller
 {
+	public function __construct()
+	{
+		$this->persons = new PersonModel();
+	}
+
   public function json()
 	{
-		return DataTables::of(PersonModel::query()->limit(50))->addIndexColumn()->toJson();
+		return DataTables::of($this->persons->limit(50))->addIndexColumn()->toJson();
 	}
 
 	public function datatables()
@@ -22,4 +27,25 @@ class TableController extends Controller
 
 		return view('datatable', $data);
 	}
+
+	public function table()
+	{
+		$data = [
+			'title' => 'Table',
+			'page' => 'table',
+			'persons' => $this->persons
+			->when(request('search'), function ($query) {
+				$search = request('search');
+				$query->where(function ($q) use ($search) {
+					$q->where('name', 'ilike', "%{$search}%")
+					  ->orWhere('email', 'ilike', "%{$search}%");
+				});
+			})
+			->paginate(25),
+		];
+
+		return view('table', $data);
+	}
+
+
 }
